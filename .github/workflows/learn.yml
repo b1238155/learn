@@ -47,9 +47,6 @@ jobs:
           shopt -s extglob
           rm -rf !(.git)
 
-      # Copy the build files to the gh-pages branch
-      - name: Copy Build Files to gh-pages
-        run: cp -r build/* gh-pages/
 
       # Commit and Push Changes to gh-pages branch
       - name: Commit and Push Changes
