@@ -45,9 +45,5 @@ jobs:
           path: gh-pages
 
         
-      - name: Commit and Push Changes
-        run: |
-          cd gh-pages
-          git add .
-          git commit -m "Update App.js"
-          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:gh-pages
+      - name: Deploy
+        run: echo "Hello World"
