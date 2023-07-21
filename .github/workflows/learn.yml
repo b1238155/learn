@@ -35,8 +35,7 @@ jobs:
       - name: Create gh-pages directory if not exists
         run: mkdir -p gh-pages
 
-      - name: Copy Build Files to gh-pages
-        run: cp -r build/* gh-pages/
+    
 
       - name: Checkout Repository to gh-pages branch
         uses: actions/checkout@v2
