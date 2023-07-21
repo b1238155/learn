@@ -32,17 +32,23 @@ jobs:
       - name: Set up Git
         run: git config --global user.name 'GitHub Actions' && git config --global user.email 'actions@github.com'
 
-      - name: Checkout Repository
+      - name: Create gh-pages directory if not exists
+        run: mkdir -p gh-pages
+
+      - name: Copy Build Files to gh-pages
+        run: cp -r build/* gh-pages/
+
+      - name: Checkout Repository to gh-pages branch
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
-          ref: main
+          ref: gh-pages
           path: gh-pages
 
-      
+        
       - name: Commit and Push Changes
         run: |
-          
+          cd gh-pages
           git add .
           git commit -m "Update App.js"
-          
+          git push --force "https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" HEAD:gh-pages
