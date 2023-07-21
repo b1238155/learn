@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: ${{ github.repository }}
-          ref: gh-pages
+          ref: main
           path: gh-pages
 
       # Commit and Push Changes to gh-pages branch
