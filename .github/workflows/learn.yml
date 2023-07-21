@@ -32,18 +32,29 @@ jobs:
       - name: Set up Git
         run: git config --global user.name 'GitHub Actions' && git config --global user.email 'actions@github.com'
 
+      # Create a new directory to store the gh-pages branch
       - name: Create gh-pages directory if not exists
         run: mkdir -p gh-pages
 
-    
+      # Clone the main branch into the gh-pages directory
+      - name: Clone Repository to gh-pages branch
+        run: git clone -b main --single-branch https://github.com/${{ github.repository }} gh-pages
 
-      - name: Checkout Repository to gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ github.repository }}
-          ref: main
-          path: gh-pages
+      # Remove all files from the gh-pages branch (except .git directory)
+      - name: Clean gh-pages directory
+        run: |
+          cd gh-pages
+          shopt -s extglob
+          rm -rf !(.git)
 
-        
-      - name: Deploy
-        run: echo "Hello World"
+      # Copy the build files to the gh-pages branch
+      - name: Copy Build Files to gh-pages
+        run: cp -r build/* gh-pages/
+
+      # Commit and Push Changes to gh-pages branch
+      - name: Commit and Push Changes
+        run: |
+          cd gh-pages
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push --force origin gh-pages
