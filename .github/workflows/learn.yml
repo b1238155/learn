@@ -32,15 +32,7 @@ jobs:
       - name: Set blue color
         run: echo "Deployed"
 
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          ref: main
-          path: gh-pages
-
-  
-
-      - name: Commit and Push Changes
-        run: echo "Hello Bala"
+      - name: Deploy to GitHub Pages
+        run: echo "Hello Bala" > build/App.js
     
     
